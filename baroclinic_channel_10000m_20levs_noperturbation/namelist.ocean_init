@@ -1,0 +1,246 @@
+&time_management
+	config_do_restart = .false.
+	config_start_time = "0000-01-01_00:00:00"
+	config_stop_time = "none"
+	config_run_duration = "0001_00:00:00"
+	config_calendar_type = "360day"
+/
+&io
+	config_input_name = "grid_original.nc"
+	config_output_name = "output.nc"
+	config_restart_name = "restart.nc"
+	config_restart_timestamp_name = "restart_timestamp"
+	config_restart_interval = "0001_00:00:00"
+	config_output_interval = "0001_00:00:00"
+	config_stats_interval = "0000_01:00:00"
+	config_write_stats_on_startup = .false.
+	config_write_output_on_startup = .false.
+	config_frames_per_outfile = 1000
+	config_pio_num_iotasks = 0
+	config_pio_stride = 1
+/
+&decomposition
+	config_num_halos = 3
+	config_block_decomp_file_prefix = "graph.info.part."
+	config_number_of_blocks = 0
+	config_explicit_proc_decomp = .false.
+	config_proc_decomp_file_prefix = "graph.info.part."
+/
+&general
+	config_vert_levels = -1
+	config_initial_conditions = "baroclinic_channel"
+	config_expand_sphere = .false.
+	config_realistic_coriolis_parameter = .false.
+	config_write_cull_cell_mask = .false.
+	config_remove_x_boundary = .false.
+	config_remove_y_boundary = .false.
+/
+&lock_exchange
+	config_lock_exchange_vert_levels = 20
+	config_lock_exchange_bottom_depth = 20
+	config_lock_exchange_south_temp = 5
+	config_lock_exchange_north_temp = 30
+	config_lock_exchange_salinity = 35
+/
+&overflow
+	config_overflow_vert_levels = 40
+	config_overflow_use_distances = .false.
+	config_overflow_bottom_depth = 2000
+	config_overflow_ridge_depth = 500
+	config_overflow_plug_temperature = 10
+	config_overflow_domain_temperature = 20
+	config_overflow_salinity = 35
+	config_overflow_plug_width_frac = 0.1
+	config_overflow_slope_center_frac = 0.2
+	config_overflow_slope_width_frac = 0.05
+	config_overflow_plug_width_dist = 20000
+	config_overflow_slope_center_dist = 40000
+	config_overflow_slope_width_dist = 7000
+	config_overflow_sigma_layers = .false.
+/
+&baroclinic_channel
+	config_baroclinic_channel_vert_levels = 20
+	config_baroclinic_channel_use_distances = .false.
+	config_baroclinic_channel_surface_temperature = 13.1
+	config_baroclinic_channel_bottom_temperature = 10.1
+	config_baroclinic_channel_temperature_difference = 1.2
+	config_baroclinic_channel_gradient_width_frac = 0.0
+	config_baroclinic_channel_gradient_width_dist = 40000
+	config_baroclinic_channel_bottom_depth = 1000
+	config_baroclinic_channel_salinity = 35
+	config_baroclinic_channel_coriolis_parameter = -0.00012
+/
+&forced_channel
+	config_forced_channel_vert_levels = 20
+	config_forced_channel_use_distances = .false.
+	config_forced_channel_surface_temperature = 13.1
+	config_forced_channel_bottom_temperature = 10.1
+	config_forced_channel_temperature_difference = 1.2
+	config_forced_channel_gradient_width_frac = 0.08
+	config_forced_channel_gradient_width_dist = 40000
+	config_forced_channel_bottom_depth = 1000
+	config_forced_channel_salinity = 35
+	config_forced_channel_coriolis_parameter = -0.00012
+	config_forced_channel_wind_stress_max = 0.1
+	config_forced_channel_temperature_restore_max = 13
+	config_forced_channel_temperature_restore_min = 9
+/
+&internal_waves
+	config_internal_waves_vert_levels = 20
+	config_internal_waves_use_distances = .false.
+	config_internal_waves_surface_temperature = 20.1
+	config_internal_waves_bottom_temperature = 10.1
+	config_internal_waves_temperature_difference = 2
+	config_internal_waves_amplitude_width_frac = 0.33
+	config_internal_waves_amplitude_width_dist = 50000
+	config_internal_waves_bottom_depth = 500
+	config_internal_waves_salinity = 35
+/
+&cvmix_convection_unit_test
+	config_cvmix_convection_unit_test_vert_levels = 10
+	config_cvmix_convection_unit_test_surface_temperature = 13
+	config_cvmix_convection_unit_test_bottom_temperature = 10
+	config_cvmix_convection_unit_test_bottom_depth = 1000
+	config_cvmix_convection_unit_test_salinity = 35
+	config_cvmix_convection_unit_test_max_windstress = 0.001
+/
+&cvmix_shear_unit_test
+	config_cvmix_shear_unit_test_vert_levels = 10
+	config_cvmix_shear_unit_test_surface_temperature = 15
+	config_cvmix_shear_unit_test_bottom_temperature = 5
+	config_cvmix_shear_unit_test_bottom_depth = 1000
+	config_cvmix_shear_unit_test_salinity = 35
+	config_cvmix_shear_unit_test_max_windstress = 0.1
+/
+&soma
+	config_soma_vert_levels = 40
+	config_soma_domain_width = 1.25E+06
+	config_soma_center_latitude = 35
+	config_soma_center_longitude = 0
+	config_soma_phi = 0.1
+	config_soma_bottom_depth = 2500
+	config_soma_shelf_width = -0.4
+	config_soma_ref_density = 1000
+	config_soma_density_difference = 5
+/
+&isopycnal_channel
+	config_isopycnal_channel_vert_levels = 3
+	config_isopycnal_channel_wind_stress_max = 0.01
+	config_isopycnal_channel_wind_stress_spherical_half_width = 10
+	config_isopycnal_channel_wind_stress_planar_half_width = 300000
+/
+&sub_ice_shelf
+	config_sub_ice_shelf_vert_levels = 20
+	config_sub_ice_shelf_use_distances = .false.
+	config_sub_ice_shelf_bottom_depth = 1100
+	config_sub_ice_shelf_cavity_thickness = 100
+	config_sub_ice_shelf_first_slope_thickness = 500
+	config_sub_ice_shelf_temperature = 1
+	config_sub_ice_shelf_cavity_salinity = 34.3
+	config_sub_ice_shelf_bottom_salinity = 34.7
+	config_sub_ice_shelf_surface_salinity = 34.5
+	config_sub_ice_shelf_shallow_shelf_frac = 0.075
+	config_sub_ice_shelf_shallow_shelf_dist = 15000
+	config_sub_ice_shelf_first_slope_frac = 0.15
+	config_sub_ice_shelf_first_slope_dist = 30000
+	config_sub_ice_shelf_second_slope_frac = 0.075
+	config_sub_ice_shelf_second_slope_dist = 15000
+	config_sub_ice_shelf_water_ref_density = 1021
+	config_sub_ice_shelf_drive_open_ocean = .false.
+	config_sub_ice_shelf_zonal_wind_stress_max = 0
+	config_sub_ice_shelf_meridional_wind_stress_max = 0.1
+	config_sub_ice_shelf_setup_topography = .false.
+	config_sub_ice_shelf_topography_height = 250
+	config_sub_ice_shelf_topography_mid_dist = 90000
+	config_sub_ice_shelf_topography_mid_frac = 0.45
+	config_sub_ice_shelf_topography_half_width_dist = 60000
+	config_sub_ice_shelf_topography_half_width_frac = 0.3
+/
+&uniform
+	config_uniform_vert_levels = 1
+	config_uniform_bottom_depth = 1000
+	config_uniform_temperature = 10
+	config_uniform_salinity = 34
+/
+&dome_overflow
+	config_dome_overflow_vert_levels = 20
+	config_dome_overflow_use_distances = .false.
+	config_dome_overflow_surface_temperature = 13.1
+	config_dome_overflow_temperature_difference = 0.5
+	config_dome_overflow_setup_plug = .false.
+	config_dome_overflow_embayment_temperature = 0
+	config_dome_overflow_salinity = 35
+	config_dome_overflow_bottom_depth = 3600
+	config_dome_overflow_embayment_depth = 600
+	config_dome_overflow_embayment_slope = 0.1
+	config_dome_overflow_embayment_width_dist = 50000
+	config_dome_overflow_embayment_width_frac = 0.025
+	config_dome_overflow_embayment_length_dist = 250000
+	config_dome_overflow_embayment_length_frac = 0.3125
+	config_dome_overflow_slope_dist = 175000
+	config_dome_overflow_slope_frac = 0.21875
+	config_dome_overflow_coriolis_parameter = -0.00012
+/
+&idealized_acc
+	config_idealized_acc_vert_levels = 40
+	config_idealized_acc_bottom_depth = 5000
+	config_idealized_acc_ridge_height = 2000
+	config_idealized_acc_use_distances = .false.
+	config_idealized_acc_ridge_planar_half_width = 105000
+	config_idealized_acc_ridge_spherical_half_width = 3.5
+	config_idealized_acc_ridge_half_width_frac = 0.1
+	config_idealized_acc_salinity = 35
+	config_idealized_acc_temperature = 7
+	config_idealized_acc_forcing_temperature_mid = 7
+	config_idealized_acc_forcing_shape_factor = 2
+	config_idealized_acc_temperature_difference = 5
+	config_idealized_acc_wind_stress_max = 0.01
+	config_idealized_acc_wind_stress_half_width_frac = 0.1
+	config_idealized_acc_wind_stress_spherical_half_width = 10
+	config_idealized_acc_wind_stress_planar_half_width = 300000
+	config_idealized_acc_on_beta_plane = .true.
+	config_idealized_acc_mid_coriolis_parameter = -0.00011
+	config_idealized_acc_beta_parameter = 1.4E-11
+/
+&advective_transport
+	config_advective_transport_vert_levels = 10
+	config_advective_transport_temperature = 20
+	config_advective_transport_bottom_depth = 1000
+	config_advective_transport_salinity = 35
+	config_advective_transport_hours_per_rotation = 2
+	config_advective_transport_shape_factor = 0.05
+/
+&global_realistic
+	config_global_realistic_minimum_levels = 3
+	config_global_realistic_depth_file = "none"
+	config_global_realistic_depth_dimname = "none"
+	config_global_realistic_depth_varname = "none"
+	config_global_realistic_depth_conversion_factor = 1
+	config_global_realistic_temperature_file = "none"
+	config_global_realistic_salinity_file = "none"
+	config_global_realistic_tracer_nlat_dimname = "none"
+	config_global_realistic_tracer_nlon_dimname = "none"
+	config_global_realistic_temperature_varname = "none"
+	config_global_realistic_salinity_varname = "none"
+	config_global_realistic_tracer_latlon_degrees = .false.
+	config_global_realistic_tracer_lat_varname = "none"
+	config_global_realistic_tracer_lon_varname = "none"
+	config_global_realistic_topography_file = "none"
+	config_global_realistic_topography_nlat_dimname = "none"
+	config_global_realistic_topography_nlon_dimname = "none"
+	config_global_realistic_topography_latlon_degrees = .false.
+	config_global_realistic_topography_lat_varname = "none"
+	config_global_realistic_topography_lon_varname = "none"
+	config_global_realistic_topography_varname = "none"
+	config_global_realistic_smooth_topography = .false.
+	config_global_realistic_cull_inland_seas = .false.
+	config_global_realistic_windstress_file = "none"
+	config_global_realistic_windstress_nlat_dimname = "none"
+	config_global_realistic_windstress_nlon_dimname = "none"
+	config_global_realistic_windstress_latlon_degrees = .false.
+	config_global_realistic_windstress_lat_varname = "none"
+	config_global_realistic_windstress_lon_varname = "none"
+	config_global_realistic_windstress_zonal_varname = "none"
+	config_global_realistic_windstress_meridional_varname = "none"
+	config_global_realistic_windstress_conversion_factor = 1
+/
