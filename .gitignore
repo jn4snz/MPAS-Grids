@@ -9,4 +9,3 @@ ocean_init_model
 log.*.err
 log.*.out
 slurm*
-*files_before_culling*
