@@ -1,1 +1,3 @@
 using ~/myfiles/code/mpas_dev/mpas_tools/doug_mesh_conversion_tools/grid_gen/periodic_hex
+
+compile and run periodic_gric
