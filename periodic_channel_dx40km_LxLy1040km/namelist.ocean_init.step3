@@ -27,13 +27,13 @@
 	config_proc_decomp_file_prefix = "graph.info.part."
 /
 &general
-	config_vert_levels = -1
+	config_vert_levels = 50
 	config_initial_conditions = "idealized_acc"
 	config_expand_sphere = .false.
 	config_realistic_coriolis_parameter = .false.
-	config_write_cull_cell_mask = .false.
-	config_remove_x_boundary = .false.
-	config_remove_y_boundary = .false.
+	config_write_cull_cell_mask = .true.
+	config_remove_x_boundary = .true.
+	config_remove_y_boundary = .true.
 /
 &lock_exchange
 	config_lock_exchange_vert_levels = 20
@@ -184,7 +184,7 @@
 &idealized_acc
 	config_idealized_acc_vert_levels = 50
 	config_idealized_acc_bottom_depth = 3000
-	config_idealized_acc_ridge_height = 0
+	config_idealized_acc_ridge_height = 1000
 	config_idealized_acc_use_distances = .false.
 	config_idealized_acc_ridge_planar_half_width = 105000
 	config_idealized_acc_ridge_spherical_half_width = 3.5
