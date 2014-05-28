@@ -1,0 +1,31 @@
+
+# ******* step 1: create periodic hexagonal Voronoi Tesselation file
+rm graph.info*
+rm *.nc
+./periodic_grid 
+mv grid.nc step1_grid.nc
+
+# ******* step 2: Convert to MPAS grid
+./MpasMeshConverter.x step1_grid.nc step2_mesh.nc
+
+# ******* step 3: add cullCells variable
+cp namelist.ocean_init.step3 namelist.ocean_init
+mpirun -np  2 ocean_init_model 
+mv output.0000-01-01_00.00.00.nc step3_mesh_w_cellmask.nc
+
+# ******* step 4: cull cells, create graph.info files
+export NETCDF=/usr/local
+./MpasCellCuller.x step3_mesh_w_cellmask.nc step4_culled_mesh.nc
+mkdir -p files_before_culling
+mv graph.info* log* files_before_culling
+mv culled_graph.info graph.info
+gpmetis graph.info $nProcs
+gpmetis graph.info 2
+gpmetis graph.info 4
+gpmetis graph.info 8
+
+# ******* step 5: Add initial conditions
+cp namelist.ocean_init.step5 namelist.ocean_init
+mpirun -np 2 ocean_init_model 
+mv output.0000-01-01_00.00.00.nc step5_ocean.nc
+
