@@ -6,7 +6,7 @@
 	config_calendar_type = "360day"
 /
 &io
-	config_input_name = "grid.nc"
+	config_input_name = "step4_culled_mesh.nc"
 	config_output_name = "output.nc"
 	config_restart_name = "restart.nc"
 	config_restart_timestamp_name = "restart_timestamp"

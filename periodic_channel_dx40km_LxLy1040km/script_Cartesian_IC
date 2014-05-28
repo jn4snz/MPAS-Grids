@@ -1,8 +1,8 @@
 #!/bin/tcsh
 # script_Cartesian_IC [nProcs]
 # Script for creation of initial conditions.
-# Run from turquoise llogin node.
-# Mark Petersen, LANL, April 2014
+# Run from turquoise on an interactive session.
+# Juan A. Saenz, based on scripts by Mark Petersen and Doug Jacobsen.
 
 if ($1 == '') then 
   set nProcs = 2
@@ -10,12 +10,10 @@ else
   set nProcs = $1
 endif
 
-# ******* step 1: create Voronoi Tesselation file
+# ******* step 1: create periodic hexagonal Voronoi Tesselation file
 module purge
-#module load gcc
 module load intel
 rm graph.info*
-#sed s/"nproc ="/"nproc = $nProcs"/ namelist.input.master > namelist.input
 rm *.nc
 ./periodic_grid 
 mv grid.nc step1_grid.nc
@@ -25,31 +23,29 @@ mv grid.nc step1_grid.nc
 
 # ******* step 3: add cullCells variable
 source /usr/projects/climate/SHARED_CLIMATE/scripts/mustang_intel_openmpi.csh
-ln -isf step2_mesh.nc grid.nc
-sed s/"config_vert_levels = -1"/"config_vert_levels = 1"/ namelist.ocean_init.master > temp
-sed s/"config_write_cull_cell_mask = .false."/"config_write_cull_cell_mask = .true."/ temp > namelist.ocean_init
+cp namelist.ocean_init.step3 namelist.ocean_init
 mpirun -np  $nProcs ocean_init_model 
 mv output.0000-01-01_00.00.00.nc step3_mesh_w_cellmask.nc
 
 # ******* step 4: cull cells, create graph.info files
 module purge
-module load gcc
+module load intel
+module use /usr/projects/climate/SHARED_CLIMATE/modulefiles/all
+module load metis
 setenv NETCDF /usr/projects/climate/COMMON_MPAS/software/mustang/gnu-openmpi/netcdf-3.6.3
 ./MpasCellCuller.x step3_mesh_w_cellmask.nc step4_culled_mesh.nc
 mkdir -p files_before_culling
 mv graph.info* log* files_before_culling
 mv culled_graph.info graph.info
 kmetis graph.info $nProcs
-kmetis graph.info 24 
+kmetis graph.info 24
 kmetis graph.info 16
+kmetis graph.info 8
+kmetis graph.info 4
 
 # ******* step 5: Add initial conditions
 source /usr/projects/climate/SHARED_CLIMATE/scripts/mustang_intel_openmpi.csh
-ln -isf step4_culled_mesh.nc grid.nc
-sed s/"_boundary = .true."/"_boundary = .false."/ namelist.ocean_init.master > namelist.ocean_init
+cp namelist.ocean_init.step5 namelist.ocean_init
 mpirun -np $nProcs ocean_init_model 
 mv output.0000-01-01_00.00.00.nc step5_ocean.nc
-rm temp grid.nc
-#rm grid.nc namelist.input namelist.ocean_init temp
-ln -isf step5_ocean.nc grid.nc
 

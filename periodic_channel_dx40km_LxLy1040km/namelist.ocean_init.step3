@@ -6,7 +6,7 @@
 	config_calendar_type = "360day"
 /
 &io
-	config_input_name = "grid.nc"
+	config_input_name = "step2_mesh.nc"
 	config_output_name = "output.nc"
 	config_restart_name = "restart.nc"
 	config_restart_timestamp_name = "restart_timestamp"
@@ -27,7 +27,7 @@
 	config_proc_decomp_file_prefix = "graph.info.part."
 /
 &general
-	config_vert_levels = 50
+	config_vert_levels = 1
 	config_initial_conditions = "idealized_acc"
 	config_expand_sphere = .false.
 	config_realistic_coriolis_parameter = .false.
