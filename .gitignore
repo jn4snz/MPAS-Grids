@@ -3,9 +3,11 @@
 *.mod
 *.eps
 *.jpg
-*periodic_grid
+**/periodic_grid
 *.x
 *ocean_init_model
 log.*.err
 log.*.out
 slurm*
+**/files_before_culling/*
+graph.info*
