@@ -1,6 +1,6 @@
 &periodic_grid
    nx = 26,
-   ny = 26,
+   ny = 28,
    dc = 40000.,
    nVertLevels = 1,
    nTracers = 1,

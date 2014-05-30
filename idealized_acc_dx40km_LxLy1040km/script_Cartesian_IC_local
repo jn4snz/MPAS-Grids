@@ -2,7 +2,7 @@
 # ******* step 1: create periodic hexagonal Voronoi Tesselation file
 rm graph.info*
 rm *.nc
-./periodic_grid 
+./periodic_grid
 mv grid.nc step1_grid.nc
 
 # ******* step 2: Convert to MPAS grid
